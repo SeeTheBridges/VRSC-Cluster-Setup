@@ -1,5 +1,5 @@
 #!/bin/bash
-
+cd
 
 # First we'll build our verus miner from source
 sudo apt-get update
@@ -12,9 +12,17 @@ chmod +x configure.sh
 chmod +x autogen.sh
 ./build.sh
 
+# Then we'll copy it to the root directory to make my easy start script more universal
+cp ccminer ~/
+
 # Next we'll build our Monero Ocean miner as a backup
-sudo apt-get install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev
+cd
+sudo apt-get install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev -y
 git clone https://github.com/MoneroOcean/xmrig.git
 mkdir xmrig/build && cd xmrig/build
 cmake ..
 make -j$(nproc)
+
+cp xmrig ~/
+
+cd
